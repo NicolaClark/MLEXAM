@@ -7,6 +7,7 @@ class Node:
         self.threshold = threshold #none as defualt
         self.left_child = None #none as defualt
         self.right_child = None #none as defualt
+        self.feature=feature
 
     def create_children(self,lchild,rchild):
         self.left_child = lchild

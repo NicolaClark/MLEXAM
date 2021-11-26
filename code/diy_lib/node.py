@@ -1,6 +1,9 @@
+import itertools
+import numpy as np
 class Node:
-    def __init__(self,name,parent,level,feature=None,threshold=None,gini_val=None):
-        self.name = name
+    """hi"""
+    next_id = 0         
+    def __init__(self,parent,level,feature=None,threshold=None,gini_val=None):
         self.parent = parent
         self.level = level
         self.gini_val = gini_val #none as defualt
@@ -8,6 +11,14 @@ class Node:
         self.left_child = None #none as defualt
         self.right_child = None #none as defualt
         self.feature=feature
+        self.id = Node.next_id
+        Node.next_id += 1
+    
+    def get_id(self):
+        """
+        Returns the id/name of the node
+        """
+        return self.id
 
     def create_children(self,lchild,rchild):
         """
@@ -16,32 +27,32 @@ class Node:
         self.left_child = lchild
         self.right_child = rchild
         
-    def parent(self):
+    def get_parent(self):
         """
         Returns the parent of the node
         """
         return self.parent
     
-    def children(self):
+    def get_children(self):
         """
         Returns the children of the node
         """
-        return self.left_child,self.right_child
+        return self.left_child, self.right_child
     
-    def gini_val(self):
+    def get_gini_val(self):
         """
         Returns the gini value
         """
         return self.gini_val
     
-    def feature(self):
+    def get_feature(self):
         """
         Returns the feature of the node, 
         which it uses to split
         """
         return self.feature
     
-    def threshold(self):
+    def get_threshold(self):
         """
         Returns the threshold, 
         which is a sort of "decision boundary"

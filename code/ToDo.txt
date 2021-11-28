@@ -1,0 +1,5 @@
+Decision_tree
+- for each node where chidren are created calculate split and pass relevant info to children (nodes in split + more?)
+- limit the splitting and creation of children by another factor such as min samples to split and or min samples per leaf
+- post pruning?
+- gini function/entropy funtion - entropy may lead to more balanced trees look up watch some vids https://towardsdatascience.com/decision-tree-part-2-34b31b1dc328

@@ -3,7 +3,7 @@ import numpy as np
 class Node:
     """hi"""
     next_id = 0         
-    def __init__(self,parent,level,feature=None,threshold=None,gini_val=None):
+    def __init__(self,parent, level, data = None ,feature=None,threshold=None,gini_val=None):
         self.parent = parent
         self.level = level
         self.gini_val = gini_val #none as defualt
@@ -12,6 +12,7 @@ class Node:
         self.right_child = None #none as defualt
         self.feature=feature
         self.id = Node.next_id
+        self.data = data
         Node.next_id += 1
     
     def get_id(self):

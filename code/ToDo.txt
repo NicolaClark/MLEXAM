@@ -1,6 +1,6 @@
 Decision_tree
 - post pruning?
-- entropy, classifying wiht tree (adding node attribute on leaf and a function to classify an array of values)
+- entropy, classifying with tree (adding node attribute on leaf and a function to classify an array of values)
 - names of features in counter get info thing
 - cross validation (from sctatch?)
 - feature selection 

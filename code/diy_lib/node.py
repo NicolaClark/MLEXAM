@@ -3,7 +3,8 @@ import numpy as np
 class Node:
     """hi"""
     next_id = 0         
-    def __init__(self,parent, level, data = None ,feature=None,threshold=None,gini_val=None):
+    def __init__(self,parent, level, data = None ,feature=None,threshold=None,gini_val=None,most_common_class=None):
+        self.most_common_class=most_common_class
         self.parent = parent
         self.level = level
         self.gini_val = gini_val #none as defualt
@@ -14,12 +15,6 @@ class Node:
         self.id = Node.next_id
         self.data = data
         Node.next_id += 1
-    
-    def get_id(self):
-        """
-        Returns the id/name of the node
-        """
-        return self.id
 
     def create_children(self,lchild,rchild):
         """
@@ -27,12 +22,6 @@ class Node:
         """
         self.left_child = lchild
         self.right_child = rchild
-        
-    def get_parent(self):
-        """
-        Returns the parent of the node
-        """
-        return self.parent
     
     def get_children(self):
         """
@@ -40,33 +29,6 @@ class Node:
         """
         return self.left_child, self.right_child
     
-    def get_gini_val(self):
-        """
-        Returns the gini value
-        """
-        return self.gini_val
-    
-    def get_feature(self):
-        """
-        Returns the feature of the node, 
-        which it uses to split
-        """
-        return self.feature
-    
-    def get_threshold(self):
-        """
-        Returns the threshold, 
-        which is a sort of "decision boundary"
-        """
-        return self.threshold
-    
-    def get_level(self):
-        """
-        Returns the level of the nodes
-        in the tree
-        """
-        return self.level
-        
     def get_position(self):
         """
         Returns the position in the tree,
@@ -77,8 +39,19 @@ class Node:
         elif self.left_child == None:
             return('leaf')
         else:
-            return f"node at depth {self.get_level()}"
+            return f"node at depth {self.level}"
 
+    def get_info(self):
+        if self.parent == None:
+            parent_id = None
+        else:
+            parent_id = self.parent.id
+        if self.get_children()[0] == None:
+            children_id = [None,None]
+        else:
+            children_id=[self.get_children()[0].id,self.get_children()[1].id]
+        return f"ID: {self.id} \nParent: {parent_id} \nChildren: {children_id}\nMost_common_class: {self.most_common_class} \nFeature: {self.feature} \nThreshold: {self.threshold} \nGini: {self.gini_val} \nDepth: {self.level} \nPosition: {self.get_position()}\nAmount of Datapoints: {len(self.data)}\nClasses of Datapoints: {Counter(self.data['type'])}"
+        
 
 def main():
     pass

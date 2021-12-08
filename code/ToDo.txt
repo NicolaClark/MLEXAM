@@ -7,5 +7,8 @@ Decision_tree
 - comparison to real model using same process
 
 Neural Network
-- make 
+- ask about bias initialisation, different for each layer?
+- ask about how to best initialise weights
+- impement output layer and softmax
+
 

@@ -1,5 +1,11 @@
-import itertools
+import pandas
+from typing import List
+from itertools import combinations
+from collections import Counter
 import numpy as np
+import matplotlib.pyplot as plt
+import math
+
 class Node:
     """hi"""
     next_id = 0         
@@ -52,6 +58,7 @@ class Node:
             children_id=[self.get_children()[0].id,self.get_children()[1].id]
         return f"ID: {self.id} \nParent: {parent_id} \nChildren: {children_id}\nMost_common_class: {self.most_common_class} \nFeature: {self.feature} \nThreshold: {self.threshold} \nGini: {self.gini_val} \nDepth: {self.level} \nPosition: {self.get_position()}\nAmount of Datapoints: {len(self.data)}\nClasses of Datapoints: {Counter(self.data['type'])}"
         
+
 
 def main():
     pass

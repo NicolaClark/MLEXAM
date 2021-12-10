@@ -1,5 +1,13 @@
+from diy_lib.node import Node
+import pandas
+from typing import List
+from itertools import combinations
+from collections import Counter
+import numpy as np
+import matplotlib.pyplot as plt
+import math
+
 class Decision_tree:
-    
     def __init__(self,depth,min_samples_split=2,entropy=False):
         self.entropy_choice=entropy
         self.depth = depth
@@ -13,7 +21,7 @@ class Decision_tree:
             return False
         else:
             return True
-   
+    
     def _create_tree(self, current_n,tree, data):
         #should we split?
         """This function is creating nodes though recursion"""
@@ -91,7 +99,7 @@ class Decision_tree:
         Node.next_id = 0
         root = Node(parent=None, level = 0,data=self.data,most_common_class=max(Counter(data["type"]), key = Counter(data["type"]).get))
         self.tree[root.id] = root
-        self.tree = self._create_tree(root,self.tree,self.data)
+        self.tree = self._create_tree(root, self.tree, self.data)
     
     def view(self):
         """
@@ -169,7 +177,7 @@ class Decision_tree:
         return None
         pass
 
-def main()
+def main():
     pass
-if __name__ == "__main__":
+if __name__=="__main__":
     main()

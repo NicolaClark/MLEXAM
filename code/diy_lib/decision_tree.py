@@ -157,7 +157,18 @@ class Decision_tree:
             leaf_node = self._traverse(self.tree[0],point)
             predictions.append(leaf_node.most_common_class)
         return predictions
-        pass
+    
+    def score(self, data):
+        predicted = self.predict(data)
+        class_ = data['type'].tolist()
+        true = 0
+        false = 0
+        for i in range(len(predicted)):
+            if class_[i] == predicted[i]:
+                true += 1
+            else: 
+                false += 1
+        return (true/(true+false))
     
     def _traverse(self,current_node,point):
         #move along decision tree until leaf is reached

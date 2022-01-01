@@ -6,6 +6,10 @@ from collections import Counter
 import numpy as np
 import matplotlib.pyplot as plt
 import math
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import accuracy_score
+import seaborn as sns
+from sklearn.metrics import precision_recall_fscore_support
 
 class Decision_tree:
     def __init__(self,depth,min_samples_split=2,entropy=False):
@@ -157,18 +161,32 @@ class Decision_tree:
             leaf_node = self._traverse(self.tree[0],point)
             predictions.append(leaf_node.most_common_class)
         return predictions
+        pass
+   
+    def score_matix(self, data):
+        list_of_classes = data['type'].tolist()
+        matrix = confusion_matrix(self.predict(data), data['type'].tolist())
+        fig, ax = plt.subplots(figsize=(5,5))
+        cmap = sns.diverging_palette(230, 20, as_cmap=True)
+        sns.heatmap(matrix, annot=True, xticklabels = set(list_of_classes), yticklabels = set(list_of_classes), cmap = cmap)
+        plt.savefig('Score_matrix.png')
+    
+    def evaluation(self, data):
+        y_true = data['type'].tolist()
+        y_pred = self.predict(data)
+        
+        precision, recall, fscore, supporty = precision_recall_fscore_support(y_true, y_pred, average='macro')
+        
+        acc = accuracy_score(y_true, y_pred)
+        
+        print('Accuracy:', acc)
+        print('Recall:', recall)
+        print('F1-Score:', fscore)
     
     def score(self, data):
-        predicted = self.predict(data)
-        class_ = data['type'].tolist()
-        true = 0
-        false = 0
-        for i in range(len(predicted)):
-            if class_[i] == predicted[i]:
-                true += 1
-            else: 
-                false += 1
-        return (true/(true+false))
+        y_pred = self.predict(data)
+        y_true = data['type'].tolist()
+        return accuracy_score(y_true, y_pred)
     
     def _traverse(self,current_node,point):
         #move along decision tree until leaf is reached
